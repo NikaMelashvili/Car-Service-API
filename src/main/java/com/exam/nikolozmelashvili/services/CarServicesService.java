@@ -1,5 +1,7 @@
 package com.exam.nikolozmelashvili.services;
 
+import com.exam.nikolozmelashvili.entities.dto.CarGotServicedDTO;
+import com.exam.nikolozmelashvili.entities.dto.CarIdDTO;
 import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarServicesMapper;
 import com.exam.nikolozmelashvili.entities.model.Car;
@@ -21,6 +23,7 @@ public class CarServicesService {
     private CarRepository carRepository;
 
     private ProvidedServicesRepository providedServicesRepository;
+    private CarServiceRepository carServiceRepository;
 
     @Autowired
     public void setServiceRepository(CarServiceRepository serviceRepository) {
@@ -42,11 +45,13 @@ public class CarServicesService {
         serviceRepository.save(carServiceEntity);
     }
 
-    public void getCarServiced(Long serviceId, Long carId) {
+    public void getCarServiced(CarGotServicedDTO carServicesDTO, CarIdDTO id) {
+        Long carId = id.getCarId();
         Optional<Car> car = carRepository.findById(carId);
         Car carEntity = car.get();
-        CarServices carServices = serviceRepository.findById(serviceId).get();
-        carEntity.setService(carServices);
+
+        CarServices carServices = CarServicesMapper.toCarService(carServicesDTO, carEntity, carRepository);
+        carServiceRepository.save(carServices);
 
         carRepository.save(carEntity);
 
@@ -66,5 +71,10 @@ public class CarServicesService {
 
     public Double getFullServicePrice() {
         return null;
+    }
+
+    @Autowired
+    public void setCarServiceRepository(CarServiceRepository carServiceRepository) {
+        this.carServiceRepository = carServiceRepository;
     }
 }

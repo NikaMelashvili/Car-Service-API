@@ -16,4 +16,5 @@ public class CarDTO {
     private int year;
     private String licensePlate;
     private CarServicesDTO service;
+    private ProvidedServicesDTO providedService;
 }

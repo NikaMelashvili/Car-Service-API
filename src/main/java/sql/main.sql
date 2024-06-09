@@ -38,3 +38,9 @@ alter table car
 
 alter table car
     add record_state int after last_modified_date;
+
+UPDATE car SET created_date = CURRENT_TIMESTAMP WHERE created_date IS NOT NULL;
+
+alter table service
+add constraint fk_car_id
+foreign key (car_id) references car(car_id);

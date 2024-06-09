@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 public abstract class AppEntity {
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private LocalDateTime createDate;
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
+    @Column
     private RecordState recordState = null;
 }

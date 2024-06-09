@@ -28,4 +28,8 @@ public class CarServices {
     @Column(name = "price", nullable = false)
     private double price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_id")
+    private Car car;
+
 }

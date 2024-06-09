@@ -36,4 +36,7 @@ public class Car extends AppEntity {
     @JoinColumn(name = "service_id")
     private CarServices service;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "provided_services_id")
+    private ProvidedServices providedServices;
 }

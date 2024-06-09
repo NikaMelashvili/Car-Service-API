@@ -38,6 +38,7 @@ public class CarService {
         }
 
         car.setService(service);
+        car.setRecordState(RecordState.ACTIVE);
 
         carRepository.save(car);
     }
