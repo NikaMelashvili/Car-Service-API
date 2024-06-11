@@ -29,7 +29,7 @@ public class CarServices {
     private double price;
 
     @ManyToOne(fetch = FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+            CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "latest_car_serviced")
     private Car car;
 

@@ -1,5 +1,6 @@
 package com.exam.nikolozmelashvili.entities.base;
 
+import com.exam.nikolozmelashvili.validation.ValidRecordState;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public abstract class AppEntity {
     private LocalDateTime lastModifiedDate;
 
     @Column
+    @ValidRecordState
     private Integer recordState;
 
     public RecordState getRecordStateEnum() {

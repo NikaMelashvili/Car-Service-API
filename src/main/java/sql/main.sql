@@ -43,12 +43,8 @@ UPDATE car SET created_date = CURRENT_TIMESTAMP WHERE created_date IS NOT NULL;
 
 alter table service
 add constraint fk_car_id
-foreign key (latest_car_serviced) references car(car_id);
+foreign key (car_id) references car(car_id);
 
 UPDATE car
 SET record_state = 1
 WHERE car_id = 4;
-
-alter table car
-    add constraint fk_provided_service_id
-        foreign key (latest_provided_service_id) references provided_services (provided_service_id);
