@@ -1,5 +1,6 @@
 package com.exam.nikolozmelashvili.services;
 
+import com.exam.nikolozmelashvili.entities.base.RecordState;
 import com.exam.nikolozmelashvili.entities.dto.CarGotServicedDTO;
 import com.exam.nikolozmelashvili.entities.dto.CarIdDTO;
 import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
@@ -23,7 +24,6 @@ public class CarServicesService {
     private CarRepository carRepository;
 
     private ProvidedServicesRepository providedServicesRepository;
-    private CarServiceRepository carServiceRepository;
 
     @Autowired
     public void setServiceRepository(CarServiceRepository serviceRepository) {
@@ -40,6 +40,21 @@ public class CarServicesService {
         this.providedServicesRepository = providedServicesRepository;
     }
 
+    public RecordState carStatusCheck(RecordState state){
+        if (state.equals(RecordState.ACTIVE)){
+            return RecordState.ACTIVE;
+        }
+
+        if (state.equals(RecordState.INACTIVE)){
+            return RecordState.INACTIVE;
+        }
+
+        if (state.equals(RecordState.DELETED)){
+            return RecordState.DELETED;
+        }
+        return null;
+    }
+
     public void insertService(CarServicesDTO service) {
         CarServices carServiceEntity = CarServicesMapper.toCarServices(service);
         serviceRepository.save(carServiceEntity);
@@ -51,7 +66,7 @@ public class CarServicesService {
         Car carEntity = car.get();
 
         CarServices carServices = CarServicesMapper.toCarService(carServicesDTO, carEntity, carRepository);
-        carServiceRepository.save(carServices);
+        serviceRepository.save(carServices);
 
         carRepository.save(carEntity);
 
@@ -59,6 +74,12 @@ public class CarServicesService {
         providedServices.setCar(carEntity);
         providedServices.setCarServices(carServices);
         providedServices.setPrice(carServices.getPrice());
+
+        Optional<Car> carGotServiced = carRepository.findById(carId);
+        Car carProvidedServices = carGotServiced.get();
+
+        carProvidedServices.setProvidedServices(providedServices);
+        carRepository.save(carProvidedServices);
 
         providedServicesRepository.save(providedServices);
     }
@@ -75,6 +96,6 @@ public class CarServicesService {
 
     @Autowired
     public void setCarServiceRepository(CarServiceRepository carServiceRepository) {
-        this.carServiceRepository = carServiceRepository;
+        this.serviceRepository = carServiceRepository;
     }
 }

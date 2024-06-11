@@ -33,4 +33,23 @@ public class CarServiceController {
         carServicesService.getCarServiced(carServicedRequest.getCarService(), carServicedRequest.getCarId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/engine-check")
+    public ResponseEntity<Void> getEngineChecked(@RequestBody CarServicedRequestDTO carServicedRequest) {
+        carServicesService.getCarServiced(carServicedRequest.getCarService(), carServicedRequest.getCarId());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/oil-change")
+    public ResponseEntity<Void> getOilChanged(@RequestBody CarServicedRequestDTO carServicedRequest) {
+        carServicesService.getCarServiced(carServicedRequest.getCarService(), carServicedRequest.getCarId());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @PostMapping("/new-wheels")
+    public ResponseEntity<Void> getNewWheels(@RequestBody CarServicedRequestDTO carServicedRequest) {
+        carServicesService.getCarServiced(carServicedRequest.getCarService(), carServicedRequest.getCarId());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

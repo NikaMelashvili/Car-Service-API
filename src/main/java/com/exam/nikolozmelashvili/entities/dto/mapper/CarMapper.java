@@ -12,16 +12,41 @@ public class CarMapper {
     public static CarDTO toCarDTO(Car car) {
         if (car == null) return null;
 
-        CarServicesDTO carServicesDTO = CarServicesMapper.toCarServicesDTO(car.getService());
-        ProvidedServicesDTO providedServicesDTO = ProvidedServicesMapper.toProvidedServicesDTO(car.getProvidedServices());
+        CarServicesDTO carServicesDTO = CarServicesMapper.toCarServicesDTOWithoutCar(car.getService());
+        ProvidedServicesDTO providedServicesDTO = ProvidedServicesMapper.toProvidedServicesDTOWithoutCar(car.getProvidedServices());
         return new CarDTO(car.getId(), car.getMake(), car.getModel(), car.getYear(), car.getLicensePlate(), carServicesDTO, providedServicesDTO);
     }
 
     public static Car toCar(CarDTO carDTO) {
         if (carDTO == null) return null;
 
-        CarServices carServices = CarServicesMapper.toCarServices(carDTO.getService());
-        ProvidedServices providedServices = ProvidedServicesMapper.toProvidedServices(carDTO.getProvidedService());
+        CarServices carServices = CarServicesMapper.toCarServicesWithoutCar(carDTO.getService());
+        ProvidedServices providedServices = ProvidedServicesMapper.toProvidedServicesWithoutCar(carDTO.getProvidedService());
         return new Car(carDTO.getId(), carDTO.getMake(), carDTO.getModel(), carDTO.getYear(), carDTO.getLicensePlate(), carServices, providedServices);
+    }
+
+    public static CarDTO toCarDTOWithoutServices(Car car) {
+        if (car == null) return null;
+        return new CarDTO(car.getId(), car.getMake(), car.getModel(), car.getYear(), car.getLicensePlate(), null, null);
+    }
+
+    public static Car toCarWithoutServices(CarDTO carDTO) {
+        if (carDTO == null) return null;
+        return new Car(carDTO.getId(), carDTO.getMake(), carDTO.getModel(), carDTO.getYear(), carDTO.getLicensePlate(), null, null);
+    }
+
+    public static Car toCarWithoutService(CarDTO carDTO) {
+        if (carDTO == null) return null;
+
+        Car car = new Car();
+        car.setId(carDTO.getId());
+        car.setMake(carDTO.getMake());
+        car.setModel(carDTO.getModel());
+        car.setYear(carDTO.getYear());
+        car.setLicensePlate(carDTO.getLicensePlate());
+        car.setService(null);
+        car.setProvidedServices(null);
+
+        return car;
     }
 }

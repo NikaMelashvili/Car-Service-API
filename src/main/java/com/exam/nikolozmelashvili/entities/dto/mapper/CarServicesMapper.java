@@ -12,15 +12,27 @@ public class CarServicesMapper {
     public static CarServicesDTO toCarServicesDTO(CarServices carServices) {
         if (carServices == null) return null;
 
-        CarDTO carDTO = CarMapper.toCarDTO(carServices.getCar());
+        CarDTO carDTO = CarMapper.toCarDTOWithoutServices(carServices.getCar());
         return new CarServicesDTO(carServices.getId(), carServices.getName(), carServices.getDescription(), carServices.getPrice(), carDTO);
+    }
+
+    public static CarServicesDTO toCarServicesDTOWithoutCar(CarServices carServices) {
+        if (carServices == null) return null;
+
+        return new CarServicesDTO(carServices.getId(), carServices.getName(), carServices.getDescription(), carServices.getPrice(), null);
     }
 
     public static CarServices toCarServices(CarServicesDTO carServicesDTO) {
         if (carServicesDTO == null) return null;
 
-        Car car = CarMapper.toCar(carServicesDTO.getCarDTO());
+        Car car = CarMapper.toCarWithoutServices(carServicesDTO.getCarDTO());
         return new CarServices(carServicesDTO.getId(), carServicesDTO.getName(), carServicesDTO.getDescription(), carServicesDTO.getPrice(), car);
+    }
+
+    public static CarServices toCarServicesWithoutCar(CarServicesDTO carServicesDTO) {
+        if (carServicesDTO == null) return null;
+
+        return new CarServices(carServicesDTO.getId(), carServicesDTO.getName(), carServicesDTO.getDescription(), carServicesDTO.getPrice(), null);
     }
 
     public static CarServices toCarService(CarGotServicedDTO carGotServicedDTO, Car car, CarRepository carRepository) {
