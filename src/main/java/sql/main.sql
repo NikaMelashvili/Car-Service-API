@@ -44,3 +44,7 @@ UPDATE car SET created_date = CURRENT_TIMESTAMP WHERE created_date IS NOT NULL;
 alter table service
 add constraint fk_car_id
 foreign key (car_id) references car(car_id);
+
+UPDATE car
+SET record_state = 1
+WHERE car_id = 4;

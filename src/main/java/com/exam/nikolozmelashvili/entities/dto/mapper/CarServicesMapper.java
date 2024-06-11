@@ -35,9 +35,21 @@ public class CarServicesMapper {
         return new CarServices(carServicesDTO.getId(), carServicesDTO.getName(), carServicesDTO.getDescription(), carServicesDTO.getPrice(), null);
     }
 
-    public static CarServices toCarService(CarGotServicedDTO carGotServicedDTO, Car car, CarRepository carRepository) {
+    public static CarServices toCarService(CarGotServicedDTO carGotServicedDTO, Car car) {
         if (carGotServicedDTO == null) return null;
 
         return new CarServices(carGotServicedDTO.getId(), carGotServicedDTO.getName(), carGotServicedDTO.getDescription(), carGotServicedDTO.getPrice(), car);
+    }
+
+    public static CarServices toCarServicesWithoutServices(CarServicesDTO service){
+        if (service == null) return null;
+
+        CarServices carServices = new CarServices();
+        carServices.setId(service.getId());
+        carServices.setName(service.getName());
+        carServices.setDescription(service.getDescription());
+        carServices.setPrice(service.getPrice());
+
+        return carServices;
     }
 }

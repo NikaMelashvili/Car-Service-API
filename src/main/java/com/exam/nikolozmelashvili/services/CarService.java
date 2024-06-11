@@ -50,7 +50,7 @@ public class CarService {
         }
 
         car.setService(service);
-        car.setRecordState(RecordState.ACTIVE);
+        car.setRecordStateEnum(RecordState.ACTIVE);
 
         carRepository.save(car);
     }
@@ -88,14 +88,14 @@ public class CarService {
 
     public void deactivateCar(Long id){
         Car deactivatedCar = CarMapper.toCar(getCarById(id));
-        deactivatedCar.setRecordState(RecordState.INACTIVE);
+        deactivatedCar.setRecordStateEnum(RecordState.INACTIVE);
 
         carRepository.save(deactivatedCar);
     }
 
     public void deleteCarSoft(Long id){
         Car car = CarMapper.toCar(getCarById(id));
-        car.setRecordState(RecordState.DELETED);
+        car.setRecordStateEnum(RecordState.DELETED);
 
         carRepository.save(car);
     }

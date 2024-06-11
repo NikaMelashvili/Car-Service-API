@@ -1,9 +1,7 @@
 package com.exam.nikolozmelashvili.services;
 
 import com.exam.nikolozmelashvili.entities.base.RecordState;
-import com.exam.nikolozmelashvili.entities.dto.CarGotServicedDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarIdDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.*;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarServicesMapper;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
@@ -56,8 +54,38 @@ public class CarServicesService {
     }
 
     public void insertService(CarServicesDTO service) {
+        if (service.getCarDTO() != null) {
+            insertServiceWithCar(service);
+        } else {
+            insertServiceWithoutCar(service);
+        }
+    }
+
+    public void getCarServiced(InsertExistingServiceIntoCarDTO carDTO) {
+        Optional<Car> carOptional = carRepository.findById(carDTO.getCarId());
+        Car car = carOptional.orElseThrow(() -> new RuntimeException("Car by the ID " + carDTO.getCarId() + " wasn't found"));
+        if (car.getRecordState() == RecordState.ACTIVE.getValue()) {
+            CarServices carServices = serviceRepository.getReferenceById(carDTO.getServiceId());
+
+            ProvidedServices providedServices = new ProvidedServices();
+            providedServices.setCar(car);
+            providedServices.setCarServices(carServices);
+            providedServices.setPrice(carServices.getPrice());
+
+            providedServicesRepository.save(providedServices);
+        } else {
+            throw new RuntimeException("Car by the ID " + car.getId() + " is not active");
+        }
+    }
+
+    private void insertServiceWithCar(CarServicesDTO service) {
         CarServices carServiceEntity = CarServicesMapper.toCarServices(service);
         serviceRepository.save(carServiceEntity);
+    }
+
+    private void insertServiceWithoutCar(CarServicesDTO service) {
+        CarServices carServices = CarServicesMapper.toCarServicesWithoutServices(service);
+        serviceRepository.save(carServices);
     }
 
     public void getCarServiced(CarGotServicedDTO carServicesDTO, CarIdDTO id) {
@@ -65,7 +93,7 @@ public class CarServicesService {
         Optional<Car> car = carRepository.findById(carId);
         Car carEntity = car.get();
 
-        CarServices carServices = CarServicesMapper.toCarService(carServicesDTO, carEntity, carRepository);
+        CarServices carServices = CarServicesMapper.toCarService(carServicesDTO, carEntity);
         serviceRepository.save(carServices);
 
         carRepository.save(carEntity);
@@ -90,8 +118,8 @@ public class CarServicesService {
         return service;
     }
 
-    public Double getFullServicePrice() {
-        return null;
+    public Double getRevenueByServiceType(String serviceName) {
+        return providedServicesRepository.getTotalRevenueByServiceType(serviceName);
     }
 
     @Autowired
