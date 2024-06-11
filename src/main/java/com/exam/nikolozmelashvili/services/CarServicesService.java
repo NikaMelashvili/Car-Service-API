@@ -1,8 +1,13 @@
 package com.exam.nikolozmelashvili.services;
 
+import com.exam.nikolozmelashvili.config.Error;
 import com.exam.nikolozmelashvili.entities.base.RecordState;
-import com.exam.nikolozmelashvili.entities.dto.*;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarServicesMapper;
+import com.exam.nikolozmelashvili.entities.dto.request.CarGotServicedDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarIdDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.InsertExistingServiceIntoCarDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.ProvidedServicesResponseDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
 import com.exam.nikolozmelashvili.entities.model.ProvidedServices;
@@ -38,21 +43,6 @@ public class CarServicesService {
         this.providedServicesRepository = providedServicesRepository;
     }
 
-    public RecordState carStatusCheck(RecordState state){
-        if (state.equals(RecordState.ACTIVE)){
-            return RecordState.ACTIVE;
-        }
-
-        if (state.equals(RecordState.INACTIVE)){
-            return RecordState.INACTIVE;
-        }
-
-        if (state.equals(RecordState.DELETED)){
-            return RecordState.DELETED;
-        }
-        return null;
-    }
-
     public void insertService(CarServicesDTO service) {
         if (service.getCarDTO() != null) {
             insertServiceWithCar(service);
@@ -63,7 +53,7 @@ public class CarServicesService {
 
     public void getCarServiced(InsertExistingServiceIntoCarDTO carDTO) {
         Optional<Car> carOptional = carRepository.findById(carDTO.getCarId());
-        Car car = carOptional.orElseThrow(() -> new RuntimeException("Car by the ID " + carDTO.getCarId() + " wasn't found"));
+        Car car = carOptional.orElseThrow(() -> new RuntimeException(String.valueOf(Error.NOT_FOUND)));
         if (car.getRecordState() == RecordState.ACTIVE.getValue()) {
             CarServices carServices = serviceRepository.getReferenceById(carDTO.getServiceId());
 
@@ -74,7 +64,7 @@ public class CarServicesService {
 
             providedServicesRepository.save(providedServices);
         } else {
-            throw new RuntimeException("Car by the ID " + car.getId() + " is not active");
+            throw new RuntimeException(String.valueOf(Error.FORBIDDEN));
         }
     }
 
@@ -112,9 +102,9 @@ public class CarServicesService {
         providedServicesRepository.save(providedServices);
     }
 
-    public ProvidedServices getProvidedService(Long id) {
+    public ProvidedServicesResponseDTO getProvidedService(Long id) {
         Optional<ProvidedServices> providedServices = providedServicesRepository.findById(id);
-        ProvidedServices service = providedServices.get();
+        ProvidedServicesResponseDTO service = providedServices.get();
         return service;
     }
 

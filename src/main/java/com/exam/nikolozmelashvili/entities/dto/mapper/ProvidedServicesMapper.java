@@ -1,30 +1,31 @@
 package com.exam.nikolozmelashvili.entities.dto.mapper;
 
-import com.exam.nikolozmelashvili.entities.dto.CarDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
-import com.exam.nikolozmelashvili.entities.dto.ProvidedServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarRequestDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.ProvidedServicesRequestDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.ProvidedServicesResponseDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
 import com.exam.nikolozmelashvili.entities.model.ProvidedServices;
 
 public class ProvidedServicesMapper {
 
-    public static ProvidedServicesDTO toProvidedServicesDTO(ProvidedServices providedServices) {
+    public static ProvidedServicesRequestDTO toProvidedServicesDTO(ProvidedServices providedServices) {
         if (providedServices == null) return null;
 
         CarServicesDTO carServicesDTO = CarServicesMapper.toCarServicesDTOWithoutCar(providedServices.getCarServices());
-        CarDTO carDTO = CarMapper.toCarDTOWithoutServices(providedServices.getCar());
-        return new ProvidedServicesDTO(providedServices.getId(), carDTO, carServicesDTO, providedServices.getPrice());
+        CarRequestDTO carDTO = CarMapper.toCarDTOWithoutServices(providedServices.getCar());
+        return new ProvidedServicesRequestDTO(providedServices.getId(), carDTO, carServicesDTO, providedServices.getPrice());
     }
 
-    public static ProvidedServicesDTO toProvidedServicesDTOWithoutCar(ProvidedServices providedServices) {
+    public static ProvidedServicesResponseDTO toProvidedServicesDTOWithoutCar(ProvidedServices providedServices) {
         if (providedServices == null) return null;
 
         CarServicesDTO carServicesDTO = CarServicesMapper.toCarServicesDTOWithoutCar(providedServices.getCarServices());
-        return new ProvidedServicesDTO(providedServices.getId(), null, carServicesDTO, providedServices.getPrice());
+        return new ProvidedServicesResponseDTO(providedServices.getId(), null, carServicesDTO, providedServices.getPrice());
     }
 
-    public static ProvidedServices toProvidedServices(ProvidedServicesDTO providedServicesDTO) {
+    public static ProvidedServices toProvidedServices(ProvidedServicesRequestDTO providedServicesDTO) {
         if (providedServicesDTO == null) return null;
 
         CarServices carServices = CarServicesMapper.toCarServicesWithoutCar(providedServicesDTO.getCarServices());
@@ -32,7 +33,7 @@ public class ProvidedServicesMapper {
         return new ProvidedServices(providedServicesDTO.getId(), car, carServices, providedServicesDTO.getPrice());
     }
 
-    public static ProvidedServices toProvidedServicesWithoutCar(ProvidedServicesDTO providedServicesDTO) {
+    public static ProvidedServices toProvidedServicesWithoutCar(ProvidedServicesRequestDTO providedServicesDTO) {
         if (providedServicesDTO == null) return null;
 
         CarServices carServices = CarServicesMapper.toCarServicesWithoutCar(providedServicesDTO.getCarServices());

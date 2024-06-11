@@ -1,6 +1,7 @@
 package com.exam.nikolozmelashvili.controller;
 
-import com.exam.nikolozmelashvili.entities.dto.CarDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarRequestDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.CarResponseDTO;
 import com.exam.nikolozmelashvili.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,25 +22,25 @@ public class CarController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addCar(@RequestBody CarDTO car) {
+    public ResponseEntity<Void> addCar(@RequestBody CarRequestDTO car) {
         carService.saveCar(car);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<CarDTO> getCarById (@PathVariable Long id){
-        CarDTO carDTO = carService.getCarById(id);
+    public ResponseEntity<CarResponseDTO> getCarById (@PathVariable Long id){
+        CarResponseDTO carDTO = carService.getCarById(id);
         return new ResponseEntity<>(carDTO, HttpStatus.OK);
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<CarDTO>> getAllCars() {
-        List<CarDTO> cars = carService.getAllCars();
+    public ResponseEntity<List<CarResponseDTO>> getAllCars() {
+        List<CarResponseDTO> cars = carService.getAllCars();
         return new ResponseEntity<>(cars, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Void> updateCar(@PathVariable Long id, @RequestBody CarDTO carDTO){
+    public ResponseEntity<Void> updateCar(@PathVariable Long id, @RequestBody CarRequestDTO carDTO){
         carService.updateCar(id, carDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,4 +1,4 @@
-package com.exam.nikolozmelashvili.entities.dto;
+package com.exam.nikolozmelashvili.entities.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarServicesDTO {
-    private Long id;
-    private String name;
-    private String description;
+public class ProvidedServicesRequestDTO {
+    private CarRequestDTO car;
+    private CarServicesDTO carServices;
     private double price;
-    private CarDTO carDTO;
 }

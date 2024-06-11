@@ -34,11 +34,11 @@ public class Car extends AppEntity {
 
     @ManyToOne(fetch = FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "service_id")
+    @JoinColumn(name = "latest_service_id")
     private CarServices service;
 
     @ManyToOne(fetch = FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "provided_services_id")
+    @JoinColumn(name = "latest_provided_service_id")
     private ProvidedServices providedServices;
 }

@@ -1,20 +1,21 @@
-package com.exam.nikolozmelashvili.entities.dto;
+package com.exam.nikolozmelashvili.entities.dto.response;
 
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicesDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class CarDTO {
+@NoArgsConstructor
+public class CarResponseDTO {
     private Long id;
     private String make;
     private String model;
     private int year;
     private String licensePlate;
     private CarServicesDTO service;
-    private ProvidedServicesDTO providedService;
+    private ProvidedServicesResponseDTO servicesResponseDTO;
 }

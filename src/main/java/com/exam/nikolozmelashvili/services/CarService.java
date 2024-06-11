@@ -1,10 +1,11 @@
 package com.exam.nikolozmelashvili.services;
 
 import com.exam.nikolozmelashvili.entities.base.RecordState;
-import com.exam.nikolozmelashvili.entities.dto.CarDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarRequestDTO;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarMapper;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarServicesMapper;
 import com.exam.nikolozmelashvili.entities.dto.mapper.ProvidedServicesMapper;
+import com.exam.nikolozmelashvili.entities.dto.response.CarResponseDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
 import com.exam.nikolozmelashvili.repository.CarRepository;
@@ -32,7 +33,7 @@ public class CarService {
         this.serviceRepository = serviceRepository;
     }
 
-    public void saveCar(CarDTO carDTO) {
+    public void saveCar(CarRequestDTO carDTO) {
         if (carDTO.getService() != null){
             saveCarWithService(carDTO);
         } else {
@@ -40,7 +41,7 @@ public class CarService {
         }
     }
 
-    public void saveCarWithService(CarDTO carDTO){
+    public void saveCarWithService(CarRequestDTO carDTO){
         Car car = CarMapper.toCar(carDTO);
         CarServices service = car.getService();
         if (service.getId() == null) {
@@ -55,26 +56,26 @@ public class CarService {
         carRepository.save(car);
     }
 
-    public void saveCarWithoutService(CarDTO carDTO){
+    public void saveCarWithoutService(CarRequestDTO carDTO){
         Car car = CarMapper.toCarWithoutService(carDTO);
 
         carRepository.save(car);
     }
 
-    public CarDTO getCarById(Long id) {
+    public CarResponseDTO getCarById(Long id) {
         Car car = carRepository.findById(id).orElse(null);
-        return CarMapper.toCarDTO(car);
+        return CarMapper.toCarDTOResponse(car);
     }
 
-    public List<CarDTO> getAllCars() {
+    public List<CarResponseDTO> getAllCars() {
         List<Car> cars = carRepository.findAll();
         return cars.stream()
-                .map(CarMapper::toCarDTO)
+                .map(CarMapper::toCarDTOResponse)
                 .collect(Collectors.toList());
     }
 
-    public void updateCar(Long id, CarDTO carDTO){
-        Car updatedCar = CarMapper.toCar(getCarById(id));
+    public void updateCar(Long id, CarRequestDTO carDTO){
+        Car updatedCar = CarMapper.toUpdatedCar(id, carDTO);
 
         updatedCar.setMake(carDTO.getMake());
         updatedCar.setModel(carDTO.getModel());
@@ -87,7 +88,7 @@ public class CarService {
     }
 
     public void deactivateCar(Long id){
-        Car deactivatedCar = CarMapper.toCar(getCarById(id));
+        Car deactivatedCar = CarMapper.toCarFromRequest(getCarById(id));
         deactivatedCar.setRecordStateEnum(RecordState.INACTIVE);
 
         carRepository.save(deactivatedCar);

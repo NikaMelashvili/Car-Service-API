@@ -1,18 +1,17 @@
 package com.exam.nikolozmelashvili.entities.dto.mapper;
 
-import com.exam.nikolozmelashvili.entities.dto.CarDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarGotServicedDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarRequestDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarGotServicedDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicesDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
-import com.exam.nikolozmelashvili.repository.CarRepository;
 
 public class CarServicesMapper {
 
     public static CarServicesDTO toCarServicesDTO(CarServices carServices) {
         if (carServices == null) return null;
 
-        CarDTO carDTO = CarMapper.toCarDTOWithoutServices(carServices.getCar());
+        CarRequestDTO carDTO = CarMapper.toCarDTOWithoutServices(carServices.getCar());
         return new CarServicesDTO(carServices.getId(), carServices.getName(), carServices.getDescription(), carServices.getPrice(), carDTO);
     }
 

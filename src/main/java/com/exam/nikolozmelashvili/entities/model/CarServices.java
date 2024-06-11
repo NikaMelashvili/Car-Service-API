@@ -30,7 +30,7 @@ public class CarServices {
 
     @ManyToOne(fetch = FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "latest_car_serviced")
     private Car car;
 
 }

@@ -1,8 +1,10 @@
 package com.exam.nikolozmelashvili.controller;
 
-import com.exam.nikolozmelashvili.entities.dto.CarServicedRequestDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
-import com.exam.nikolozmelashvili.entities.dto.InsertExistingServiceIntoCarDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicedRequestDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.InsertExistingServiceIntoCarDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.ProvidedServicesResponseDTO;
+import com.exam.nikolozmelashvili.entities.model.ProvidedServices;
 import com.exam.nikolozmelashvili.services.CarServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +40,12 @@ public class CarServiceController {
         return new ResponseEntity<>(revenue, HttpStatus.OK);
     }
 
+    @GetMapping("/get-service/{id}")
+    public ResponseEntity<ProvidedServicesResponseDTO> getProvidedService(@PathVariable Long id){
+        ProvidedServicesResponseDTO providedServices = carServicesService.getProvidedService(id);
+        return new ResponseEntity<>(providedServices, HttpStatus.OK);
+    }
+
     @PostMapping("/engine-check")
     public ResponseEntity<Void> getEngineChecked(@RequestBody CarServicedRequestDTO carServicedRequest) {
         carServicesService.getCarServiced(carServicedRequest.getCarService(), carServicedRequest.getCarId());
@@ -49,7 +57,6 @@ public class CarServiceController {
         carServicesService.getCarServiced(carServicedRequest.getCarService(), carServicedRequest.getCarId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     @PostMapping("/new-wheels")
     public ResponseEntity<Void> getNewWheels(@RequestBody CarServicedRequestDTO carServicedRequest) {

@@ -1,4 +1,4 @@
-package com.exam.nikolozmelashvili.entities.dto;
+package com.exam.nikolozmelashvili.entities.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
