@@ -1,6 +1,8 @@
 # Car Service API
 ***
-<img src="src/main/resources/images/swagger.png" alt="Project logo" width="256"/>
+<img src="src/main/resources/images/swagger.png" alt="swagger logo" width="256"/>
+<img src="src/main/resources/images/docker.png" alt="docker logo" width="256"/>
+<img src="src/main/resources/images/nlq8nvels9fudn0g9h7hpfjlq3.png" alt="mysql logo" width="312"/>
 
 ## Swagger - http://localhost:8080/swagger-ui/index.html
 ## Swagger has 2 sections one for services and other for cars
