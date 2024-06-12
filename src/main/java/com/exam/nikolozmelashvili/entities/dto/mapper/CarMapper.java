@@ -47,19 +47,4 @@ public class CarMapper {
 
         return car;
     }
-
-    public static Car toCarWithoutService(CarDTO carDTO) {
-        if (carDTO == null) return null;
-
-        Car car = new Car();
-        car.setId(carDTO.getId());
-        car.setMake(carDTO.getMake());
-        car.setModel(carDTO.getModel());
-        car.setYear(carDTO.getYear());
-        car.setLicensePlate(carDTO.getLicensePlate());
-        car.setService(null);
-        car.setProvidedServices(null);
-
-        return car;
-    }
 }

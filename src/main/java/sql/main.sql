@@ -1,50 +1,46 @@
-create database car_service;
-
-use car_service;
-
-create table car(
+create table car (
     car_id bigint primary key auto_increment,
     make varchar(255),
     model varchar(255),
     year int,
     licence_plate varchar(255),
-    service_id bigint,
-    foreign key (service_id) references service(service_id)
+    last_modified_date datetime,
+    record_state int,
+    create_date datetime,
+    latest_service_id bigint,
+    latest_provided_service_id bigint
 );
 
-create table service(
+create table service (
     service_id bigint primary key auto_increment,
     service_name varchar(255),
     service_description varchar(255),
-    price decimal
+    price decimal(10, 2),
+    latest_car_serviced bigint
 );
 
-create table provided_services(
+create table provided_services (
     provided_service_id bigint primary key auto_increment,
-    car bigint,
-    service bigint,
+    car_id bigint,
+    service_id bigint,
     create_date datetime,
     last_modified_date datetime,
-    record_state int,
-    foreign key (car) references car(car_id),
-    foreign key (service) references service(service_id)
+    record_state int
 );
 
+-- Adding foreign key constraints after table creation
 alter table car
-    add created_date datetime after licence_plate;
-
-alter table car
-    add last_modified_date datetime after created_date;
-
-alter table car
-    add record_state int after last_modified_date;
-
-UPDATE car SET created_date = CURRENT_TIMESTAMP WHERE created_date IS NOT NULL;
+add constraint fk_car_latest_service
+foreign key (latest_service_id) references service(service_id),
+add constraint fk_car_latest_provided_service
+foreign key (latest_provided_service_id) references provided_services(provided_service_id);
 
 alter table service
-add constraint fk_car_id
-foreign key (car_id) references car(car_id);
+add constraint fk_service_latest_car_serviced
+foreign key (latest_car_serviced) references car(car_id);
 
-UPDATE car
-SET record_state = 1
-WHERE car_id = 4;
+alter table provided_services
+add constraint fk_provided_services_car
+foreign key (car_id) references car(car_id),
+add constraint fk_provided_services_service
+foreign key (service_id) references service(service_id);

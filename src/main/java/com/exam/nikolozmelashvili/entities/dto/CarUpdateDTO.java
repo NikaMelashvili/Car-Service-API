@@ -1,6 +1,5 @@
 package com.exam.nikolozmelashvili.entities.dto;
 
-import com.exam.nikolozmelashvili.entities.base.RecordState;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

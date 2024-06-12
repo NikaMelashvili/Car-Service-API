@@ -38,13 +38,6 @@ public class CarServicesService {
         this.providedServicesRepository = providedServicesRepository;
     }
 
-//    public void insertService(CarServicesRequestDTO service) {
-//        if (service.getCarDTO() != null) {
-//            insertServiceWithCar(service);
-//        } else {
-//            insertServiceWithoutCar(service);
-//        }
-//    }
     public void insertService(CarServicesRequestDTO service) {
         CarServices carServiceEntity = CarServicesMapper.toCarServicesRequest(service);
         serviceRepository.save(carServiceEntity);
@@ -67,16 +60,6 @@ public class CarServicesService {
             throw new RuntimeException("Car by the ID " + car.getId() + " is not active");
         }
     }
-
-//    private void insertServiceWithCar(CarServicesRequestDTO service) {
-//        CarServices carServiceEntity = CarServicesMapper.toCarServicesRequest(service);
-//        serviceRepository.save(carServiceEntity);
-//    }
-//
-//    private void insertServiceWithoutCar(CarServicesRequestDTO service) {
-//        CarServices carServices = CarServicesMapper.toCarServicesRequest(service);
-//        serviceRepository.save(carServices);
-//    }
 
     public Double getRevenueByServiceType(String serviceName) {
         return providedServicesRepository.getTotalRevenueByServiceType(serviceName);
