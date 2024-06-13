@@ -19,29 +19,9 @@ public class CarService {
 
     private CarRepository carRepository;
 
-    private CarServiceRepository serviceRepository;
-
     @Autowired
     public void setCarRepository(CarRepository carRepository) {
         this.carRepository = carRepository;
-    }
-
-    @Autowired
-    public void setServiceRepository(CarServiceRepository serviceRepository) {
-        this.serviceRepository = serviceRepository;
-    }
-
-    public RecordState carValidator(RecordState state){
-        if (state.equals(RecordState.ACTIVE)){
-            return RecordState.ACTIVE;
-        }
-        if (state.equals(RecordState.INACTIVE)){
-            return RecordState.INACTIVE;
-        }
-        if (state.equals(RecordState.DELETED)){
-            return RecordState.DELETED;
-        }
-        return null;
     }
 
     public void saveCar(CarUpdateDTO carDTO) {

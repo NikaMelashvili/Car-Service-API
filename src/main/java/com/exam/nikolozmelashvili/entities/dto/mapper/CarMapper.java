@@ -26,11 +26,6 @@ public class CarMapper {
         return new Car(carDTO.getId(), carDTO.getMake(), carDTO.getModel(), carDTO.getYear(), carDTO.getLicensePlate(), carServices, providedServices);
     }
 
-    public static CarDTO toCarDTOWithoutServices(Car car) {
-        if (car == null) return null;
-        return new CarDTO(car.getId(), car.getMake(), car.getModel(), car.getYear(), car.getLicensePlate(), null, null);
-    }
-
     public static Car toCarWithoutServices(CarDTO carDTO) {
         if (carDTO == null) return null;
         return new Car(carDTO.getId(), carDTO.getMake(), carDTO.getModel(), carDTO.getYear(), carDTO.getLicensePlate(), null, null);
