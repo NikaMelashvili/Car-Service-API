@@ -22,16 +22,13 @@ public abstract class AppEntity {
     @Column(updatable = false)
     private LocalDateTime createDate;
 
+    @Column
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
     @Column
     @ValidRecordState
     private Integer recordState;
-
-    public RecordState getRecordStateEnum() {
-        return RecordState.fromValue(recordState);
-    }
 
     public void setRecordStateEnum(RecordState recordState) {
         this.recordState = recordState.getValue();

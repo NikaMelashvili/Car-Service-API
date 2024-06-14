@@ -6,7 +6,6 @@ import com.exam.nikolozmelashvili.entities.dto.CarUpdateDTO;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarMapper;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.repository.CarRepository;
-import com.exam.nikolozmelashvili.repository.CarServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
