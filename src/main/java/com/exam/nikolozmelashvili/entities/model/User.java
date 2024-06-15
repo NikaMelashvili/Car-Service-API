@@ -1,5 +1,6 @@
 package com.exam.nikolozmelashvili.entities.model;
 
+import com.exam.nikolozmelashvili.entities.base.AppEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User extends AppEntity {
 
     @Id
     @Column(name = "user_id")
