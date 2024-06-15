@@ -1,9 +1,9 @@
 package com.exam.nikolozmelashvili.entities.dto.mapper;
 
-import com.exam.nikolozmelashvili.entities.dto.CarDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarUpdateDTO;
-import com.exam.nikolozmelashvili.entities.dto.ProvidedServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.CarDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.CarServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarUpdateDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.ProvidedServicesDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
 import com.exam.nikolozmelashvili.entities.model.ProvidedServices;

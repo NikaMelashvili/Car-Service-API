@@ -1,7 +1,7 @@
 package com.exam.nikolozmelashvili.entities.dto.mapper;
 
-import com.exam.nikolozmelashvili.entities.dto.CarServicesDTO;
-import com.exam.nikolozmelashvili.entities.dto.ProvidedServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.CarServicesDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.ProvidedServicesDTO;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
 import com.exam.nikolozmelashvili.entities.model.ProvidedServices;
 

@@ -1,4 +1,4 @@
-package com.exam.nikolozmelashvili.entities.dto;
+package com.exam.nikolozmelashvili.entities.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Data Transfer Object for car")
-public class CarUpdateDTO {
+public class CarDTO {
+
+    @Schema(description = "Car ID", example = "107")
+    private Long id;
 
     @Schema(description = "Car Make (Brand)", example = "Ferrari")
     private String make;
@@ -24,4 +27,10 @@ public class CarUpdateDTO {
 
     @Schema(description = "Car Licence plate", example = "NI-001-KA")
     private String licensePlate;
+
+    @Schema(description = "Car's Latest service", example = "3")
+    private CarServicesDTO service;
+
+    @Schema(description = "Car's Latest provided service", example = "3")
+    private ProvidedServicesDTO providedService;
 }

@@ -1,8 +1,8 @@
 package com.exam.nikolozmelashvili.services;
 
 import com.exam.nikolozmelashvili.entities.base.RecordState;
-import com.exam.nikolozmelashvili.entities.dto.CarDTO;
-import com.exam.nikolozmelashvili.entities.dto.CarUpdateDTO;
+import com.exam.nikolozmelashvili.entities.dto.response.CarDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarUpdateDTO;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarMapper;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.repository.CarRepository;

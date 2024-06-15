@@ -32,4 +32,12 @@ public class OpenApiConfig {
                 .pathsToMatch("/rest/car/**")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi publicApiUser() {
+        return GroupedOpenApi.builder()
+                .group("users")
+                .pathsToMatch("/rest/user/**")
+                .build();
+    }
 }

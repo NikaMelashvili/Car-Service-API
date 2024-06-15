@@ -28,6 +28,15 @@ create table provided_services (
     record_state int
 );
 
+create table user (
+    user_id bigint primary key auto_increment,
+    username varchar(255),
+    email varchar(255),
+    password varchar(255),
+    car_id bigint,
+    foreign key (car_id) references car(car_id)
+);
+
 -- Adding foreign key constraints after table creation
 alter table car
 add constraint fk_car_latest_service

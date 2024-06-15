@@ -1,5 +1,6 @@
-package com.exam.nikolozmelashvili.entities.dto;
+package com.exam.nikolozmelashvili.entities.dto.request;
 
+import com.exam.nikolozmelashvili.entities.dto.response.CarDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,8 +1,9 @@
 package com.exam.nikolozmelashvili.services;
 
 import com.exam.nikolozmelashvili.entities.base.RecordState;
-import com.exam.nikolozmelashvili.entities.dto.*;
 import com.exam.nikolozmelashvili.entities.dto.mapper.CarServicesMapper;
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicesRequestDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.InsertExistingServiceIntoCarDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.CarServices;
 import com.exam.nikolozmelashvili.entities.model.ProvidedServices;

@@ -1,4 +1,4 @@
-package com.exam.nikolozmelashvili.entities.dto;
+package com.exam.nikolozmelashvili.entities.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -8,12 +8,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "DTO for inserting a service type")
-public class CarGotServicedDTO {
+@AllArgsConstructor
+@Schema(description = "DTO for car services")
+public class CarServicesDTO {
 
-    @Schema(description = "Type ID", example = "2")
+    @Schema(description = "Service ID", example = "1")
     private Long id;
 
     @Schema(description = "Type name", example = "Oil change")
@@ -22,6 +22,9 @@ public class CarGotServicedDTO {
     @Schema(description = "Type description", example = "Oil was changed")
     private String description;
 
-    @Schema(description = "Type price", example = "89.75")
+    @Schema(description = "Service price", example = "85.75")
     private double price;
+
+    @Schema(description = "Latest car that got serviced", example = "1")
+    private CarDTO carDTO;
 }

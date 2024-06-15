@@ -1,7 +1,7 @@
 package com.exam.nikolozmelashvili.controller;
 
-import com.exam.nikolozmelashvili.entities.dto.CarServicesRequestDTO;
-import com.exam.nikolozmelashvili.entities.dto.InsertExistingServiceIntoCarDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.CarServicesRequestDTO;
+import com.exam.nikolozmelashvili.entities.dto.request.InsertExistingServiceIntoCarDTO;
 import com.exam.nikolozmelashvili.services.CarServicesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
