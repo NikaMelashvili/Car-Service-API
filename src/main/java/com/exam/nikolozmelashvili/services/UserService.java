@@ -1,6 +1,5 @@
 package com.exam.nikolozmelashvili.services;
 
-import com.exam.nikolozmelashvili.entities.dto.mapper.CarMapper;
 import com.exam.nikolozmelashvili.entities.dto.request.UserRegisterDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.User;
