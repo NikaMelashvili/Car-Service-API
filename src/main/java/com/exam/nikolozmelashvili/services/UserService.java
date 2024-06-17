@@ -1,5 +1,6 @@
 package com.exam.nikolozmelashvili.services;
 
+import com.exam.nikolozmelashvili.entities.dto.mapper.CarMapper;
 import com.exam.nikolozmelashvili.entities.dto.request.UserRegisterDTO;
 import com.exam.nikolozmelashvili.entities.model.Car;
 import com.exam.nikolozmelashvili.entities.model.User;
@@ -26,20 +27,20 @@ public class UserService {
     }
 
     public Long addUser(UserRegisterDTO registerDTO) {
-        if (registerDTO.getUsername() == null || registerDTO.getPassword() == null || registerDTO.getEmail() == null) {
+        if (registerDTO.getUsername() == null || registerDTO.getPassword() == null || registerDTO.getEmail() == null || registerDTO.getCar() == null) {
             throw new RuntimeException("All fields are required");
         }
         if (validateEmail(registerDTO.getEmail())) {
             throw new RuntimeException("Email already used");
         }
 
+        Car car = CarMapper.toCarFromUpdate(registerDTO.getCar());
+        carRepository.save(car);
+
         User user = new User();
         user.setUsername(registerDTO.getUsername());
         user.setPassword(registerDTO.getPassword());
         user.setEmail(registerDTO.getEmail());
-
-        Car car = carRepository.findById(registerDTO.getCarId())
-                .orElseThrow(() -> new RuntimeException("Car not found"));
         user.setCar(car);
 
         userRepository.save(user);
