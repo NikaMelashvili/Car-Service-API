@@ -20,4 +20,7 @@ public class UserRegisterDTO {
 
     @Schema(description = "(existing) Car ID")
     private CarUpdateDTO car;
+
+    @Schema(description = "Enum role", example = "USER")
+    private String role;
 }

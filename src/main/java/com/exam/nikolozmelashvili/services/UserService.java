@@ -42,6 +42,7 @@ public class UserService {
         user.setPassword(registerDTO.getPassword());
         user.setEmail(registerDTO.getEmail());
         user.setCar(car);
+//        user.setRole(registerDTO.getRole());
 
         userRepository.save(user);
         return user.getId();
@@ -50,5 +51,4 @@ public class UserService {
     public boolean validateEmail(String email) {
         return userRepository.validateEmail(email);
     }
-
 }

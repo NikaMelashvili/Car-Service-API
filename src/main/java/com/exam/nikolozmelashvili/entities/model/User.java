@@ -40,6 +40,7 @@ public class User extends AppEntity implements UserDetails {
     @JoinColumn(name = "car_id")
     private Car car;
 
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
 
