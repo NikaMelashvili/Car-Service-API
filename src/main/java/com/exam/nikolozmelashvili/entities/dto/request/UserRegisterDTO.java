@@ -18,6 +18,9 @@ public class UserRegisterDTO {
     @Schema(description = "Password", example = "Nika123")
     private String password;
 
-    @Schema(description = "(existing) Car ID", example = "1")
-    private Long carId;
+    @Schema(description = "(existing) Car ID")
+    private CarUpdateDTO car;
+
+    @Schema(description = "Enum role", example = "USER")
+    private String role;
 }

@@ -27,21 +27,22 @@ public class UserService {
     }
 
     public Long addUser(UserRegisterDTO registerDTO) {
-        if (registerDTO.getUsername() == null || registerDTO.getPassword() == null || registerDTO.getEmail() == null) {
+        if (registerDTO.getUsername() == null || registerDTO.getPassword() == null || registerDTO.getEmail() == null || registerDTO.getCar() == null) {
             throw new RuntimeException("All fields are required");
         }
         if (validateEmail(registerDTO.getEmail())) {
             throw new RuntimeException("Email already used");
         }
 
+        Car car = CarMapper.toCarFromUpdate(registerDTO.getCar());
+        carRepository.save(car);
+
         User user = new User();
         user.setUsername(registerDTO.getUsername());
         user.setPassword(registerDTO.getPassword());
         user.setEmail(registerDTO.getEmail());
-
-        Car car = carRepository.findById(registerDTO.getCarId())
-                .orElseThrow(() -> new RuntimeException("Car not found"));
         user.setCar(car);
+//        user.setRole(registerDTO.getRole());
 
         userRepository.save(user);
         return user.getId();
@@ -50,5 +51,4 @@ public class UserService {
     public boolean validateEmail(String email) {
         return userRepository.validateEmail(email);
     }
-
 }
