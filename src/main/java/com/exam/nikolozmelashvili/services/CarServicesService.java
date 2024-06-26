@@ -54,7 +54,6 @@ public class CarServicesService {
             ProvidedServices providedServices = new ProvidedServices();
             providedServices.setCar(car);
             providedServices.setCarServices(carServices);
-            providedServices.setPrice(carServices.getPrice());
 
             providedServicesRepository.save(providedServices);
         } else {

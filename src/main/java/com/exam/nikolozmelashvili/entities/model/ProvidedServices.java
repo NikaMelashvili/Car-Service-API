@@ -19,14 +19,11 @@ public class ProvidedServices extends AppEntity {
 
     @ManyToOne(fetch = FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
-    @JoinColumn(name = "car")
+    @JoinColumn(name = "car_id")
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY ,cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
-    @JoinColumn(name = "service")
+    @JoinColumn(name = "service_id")
     private CarServices carServices;
-
-    @Column(name = "price")
-    private double price;
 }

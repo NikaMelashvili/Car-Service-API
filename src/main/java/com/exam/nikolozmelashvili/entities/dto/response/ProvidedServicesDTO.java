@@ -21,7 +21,4 @@ public class ProvidedServicesDTO {
 
     @Schema(description = "Service ID", example = "1")
     private CarServicesDTO carServices;
-
-    @Schema(description = "Price", example = "76.98")
-    private double price;
 }

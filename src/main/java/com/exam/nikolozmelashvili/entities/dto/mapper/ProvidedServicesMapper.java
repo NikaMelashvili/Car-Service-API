@@ -11,13 +11,13 @@ public class ProvidedServicesMapper {
         if (providedServices == null) return null;
 
         CarServicesDTO carServicesDTO = CarServicesMapper.toCarServicesDTOWithoutCar(providedServices.getCarServices());
-        return new ProvidedServicesDTO(providedServices.getId(), null, carServicesDTO, providedServices.getPrice());
+        return new ProvidedServicesDTO(providedServices.getId(), null, carServicesDTO);
     }
 
     public static ProvidedServices toProvidedServicesWithoutCar(ProvidedServicesDTO providedServicesDTO) {
         if (providedServicesDTO == null) return null;
 
         CarServices carServices = CarServicesMapper.toCarServicesWithoutCar(providedServicesDTO.getCarServices());
-        return new ProvidedServices(providedServicesDTO.getId(), null, carServices, providedServicesDTO.getPrice());
+        return new ProvidedServices(providedServicesDTO.getId(), null, carServices);
     }
 }
