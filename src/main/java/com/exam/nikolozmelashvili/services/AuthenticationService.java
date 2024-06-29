@@ -1,6 +1,8 @@
 package com.exam.nikolozmelashvili.services;
 
+import com.exam.nikolozmelashvili.entities.base.RecordState;
 import com.exam.nikolozmelashvili.entities.base.Role;
+import com.exam.nikolozmelashvili.entities.dto.mapper.CarMapper;
 import com.exam.nikolozmelashvili.entities.dto.request.AuthenticationRequest;
 import com.exam.nikolozmelashvili.entities.dto.request.RegisterRequest;
 import com.exam.nikolozmelashvili.entities.dto.response.AuthenticationResponse;
@@ -34,7 +36,9 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .car(CarMapper.toCarFromUpdate(request.getCarDto()))
                 .build();
+        user.setRecordState(RecordState.ACTIVE.getValue());
         userRepository.save(user);
         var token = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
@@ -42,7 +46,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) throws AuthenticationException {
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );

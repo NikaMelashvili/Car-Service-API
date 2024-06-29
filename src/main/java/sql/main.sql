@@ -30,8 +30,8 @@ create table provided_services (
 
 create table user (
     user_id bigint primary key auto_increment,
-    firstName varchar(255),
-    lastName varchar(255),
+    first_name varchar(255),
+    last_name varchar(255),
     email varchar(255),
     password varchar(255),
     role varchar(100),
