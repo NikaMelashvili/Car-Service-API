@@ -9,10 +9,10 @@
    docker pull mysql
 
 2) ```bash
-   docker run --name melashvili-mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123 -d mysql:latest
+   docker run --name some-mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123 -d mysql:latest
    
 3) ```bash
-   docker exec -it melashvili-mysql mysql -uroot -p
+   docker exec -it some-mysql mysql -uroot -p
    
 sql is included in the java/sql directory
 ***

@@ -40,4 +40,12 @@ public class OpenApiConfig {
                 .pathsToMatch("/rest/user/**")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi publicApiAuthentication() {
+        return GroupedOpenApi.builder()
+                .group("Authentication")
+                .pathsToMatch("/rest/authentication/**")
+                .build();
+    }
 }

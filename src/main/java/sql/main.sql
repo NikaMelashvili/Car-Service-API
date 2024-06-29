@@ -30,9 +30,11 @@ create table provided_services (
 
 create table user (
     user_id bigint primary key auto_increment,
-    username varchar(255),
+    firstName varchar(255),
+    lastName varchar(255),
     email varchar(255),
     password varchar(255),
+    role varchar(100),
     car_id bigint,
     foreign key (car_id) references car(car_id)
 );

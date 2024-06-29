@@ -3,10 +3,7 @@ package com.exam.nikolozmelashvili.entities.model;
 import com.exam.nikolozmelashvili.entities.base.AppEntity;
 import com.exam.nikolozmelashvili.entities.base.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,8 +25,11 @@ public class User extends AppEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "firstName")
+    private String firstName;
+
+    @Column(name = "lastName")
+    private String lastName;
 
     @Column(name = "email")
     private String email;
@@ -36,13 +37,13 @@ public class User extends AppEntity implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "car_id")
-    private Car car;
-
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -56,7 +57,7 @@ public class User extends AppEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
